@@ -1,0 +1,17 @@
+{
+  "name": "dime-la-hora",
+  "version": "1.0.0",
+  "description": "Backend Node.js para una skill de Alexa que dice la hora en castellano.",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "check": "node -e \"const skill = require('./index.js'); if (typeof skill.handler !== 'function') { throw new Error('Missing Lambda handler'); }\"",
+    "test": "npm run check"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ask-sdk-core": "^2.14.0"
+  }
+}

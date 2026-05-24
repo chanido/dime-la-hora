@@ -1,0 +1,36 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "locales": {}
+      }
+    },
+    "manifestVersion": "1.0",
+    "privacyAndCompliance": {
+      "locales": {
+        "es-ES": {}
+      }
+    },
+    "publishingInformation": {
+      "automaticDistribution": {
+        "isActive": false
+      },
+      "distributionCountries": [],
+      "isAvailableWorldwide": true,
+      "locales": {
+        "es-ES": {
+          "description": "Skill en castellano que dice la hora actual al invocarla o cuando se la pides.",
+          "examplePhrases": [
+            "Alexa, abre hora castellana",
+            "Alexa, pregunta a hora castellana que hora es",
+            "Alexa, dile a hora castellana que me diga la hora"
+          ],
+          "keywords": [],
+          "name": "Dime la Hora",
+          "summary": "Di la hora actual en castellano."
+        }
+      },
+      "testingInstructions": "1) Di 'Alexa, abre hora castellana'. 2) Di 'Alexa, pregunta a hora castellana que hora es'."
+    }
+  }
+}

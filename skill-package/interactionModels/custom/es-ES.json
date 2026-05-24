@@ -1,0 +1,43 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "hora castellana",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "HoraActualIntent",
+          "slots": [],
+          "samples": [
+            "dime la hora",
+            "que hora es",
+            "qué hora es",
+            "dame la hora",
+            "me dices la hora",
+            "quiero saber la hora",
+            "dime la hora actual"
+          ]
+        }
+      ],
+      "types": []
+    }
+  }
+}
