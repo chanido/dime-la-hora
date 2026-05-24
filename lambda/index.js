@@ -2,9 +2,8 @@ const Alexa = require('ask-sdk-core');
 
 const LOCALE = 'es-ES';
 const DEFAULT_TIME_ZONE = 'Europe/Madrid';
-const DEFAULT_TIME_ZONE_LABEL = 'España peninsular';
 
-function resolveTimeZone() {
+function resolveFallbackTimeZone() {
     const configuredTimeZone = process.env.TIME_ZONE || DEFAULT_TIME_ZONE;
 
     try {
@@ -15,9 +14,39 @@ function resolveTimeZone() {
     }
 }
 
-function getCurrentTimeParts(date = new Date()) {
+function normalizeTimeZone(timeZone) {
+    if (!timeZone) {
+        return resolveFallbackTimeZone();
+    }
+
+    try {
+        new Intl.DateTimeFormat(LOCALE, { timeZone });
+        return timeZone;
+    } catch {
+        return resolveFallbackTimeZone();
+    }
+}
+
+async function getDeviceTimeZone(handlerInput) {
+    const deviceId = handlerInput.requestEnvelope?.context?.System?.device?.deviceId;
+
+    if (!deviceId || !handlerInput.serviceClientFactory) {
+        return resolveFallbackTimeZone();
+    }
+
+    try {
+        const upsServiceClient = handlerInput.serviceClientFactory.getUpsServiceClient();
+        const deviceTimeZone = await upsServiceClient.getSystemTimeZone(deviceId);
+        return normalizeTimeZone(deviceTimeZone);
+    } catch (error) {
+        console.log(`No se pudo obtener la zona horaria del dispositivo: ${error.message}`);
+        return resolveFallbackTimeZone();
+    }
+}
+
+function getCurrentTimeParts(timeZone, date = new Date()) {
     const formatter = new Intl.DateTimeFormat(LOCALE, {
-        timeZone: resolveTimeZone(),
+        timeZone,
         hour: '2-digit',
         minute: '2-digit',
         hour12: false
@@ -30,21 +59,18 @@ function getCurrentTimeParts(date = new Date()) {
     return { hour, minute };
 }
 
-function getTimeZoneLabel() {
-    return process.env.TIME_ZONE_LABEL || DEFAULT_TIME_ZONE_LABEL;
-}
-
-function buildTimeSpeech(date = new Date()) {
-    const { hour, minute } = getCurrentTimeParts(date);
-    return `La hora actual en ${getTimeZoneLabel()} es <say-as interpret-as="time">${hour}:${minute}</say-as>.`;
+async function buildTimeSpeech(handlerInput, date = new Date()) {
+    const timeZone = await getDeviceTimeZone(handlerInput);
+    const { hour, minute } = getCurrentTimeParts(timeZone, date);
+    return `En tu dispositivo son las <say-as interpret-as="time">${hour}:${minute}</say-as>.`;
 }
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
-    handle(handlerInput) {
-        const speechOutput = `<speak>Bienvenido a Dime la Hora. ${buildTimeSpeech()}</speak>`;
+    async handle(handlerInput) {
+        const speechOutput = `<speak>Bienvenido a Dime la Hora. ${await buildTimeSpeech(handlerInput)}</speak>`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -58,8 +84,8 @@ const HoraActualIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HoraActualIntent';
     },
-    handle(handlerInput) {
-        const speechOutput = `<speak>${buildTimeSpeech()}</speak>`;
+    async handle(handlerInput) {
+        const speechOutput = `<speak>${await buildTimeSpeech(handlerInput)}</speak>`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -161,5 +187,6 @@ exports.handler = Alexa.SkillBuilders.custom()
         IntentReflectorHandler
     )
     .addErrorHandlers(ErrorHandler)
+    .withApiClient(new Alexa.DefaultApiClient())
     .withCustomUserAgent('dime-la-hora/v1.0')
     .lambda();

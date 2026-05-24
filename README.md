@@ -51,8 +51,8 @@ git push -u origin main
 
 - Invocation name: `skill-package/interactionModels/custom/es-ES.json`
 - Textos del backend: `lambda/index.js`
-- Zona horaria: variable de entorno `TIME_ZONE`, por defecto `Europe/Madrid`
-- Etiqueta hablada de la zona horaria: variable de entorno `TIME_ZONE_LABEL`, por defecto `España peninsular`
+- Zona horaria: la skill usa la configurada en el dispositivo desde el que se invoca
+- Fallback: si Alexa no devuelve la zona horaria del dispositivo, cae a `TIME_ZONE` o `Europe/Madrid`
 
 ## Pruebas locales
 
