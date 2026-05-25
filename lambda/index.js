@@ -279,7 +279,7 @@ const ConfigurarRutinaIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ConfigurarRutinaIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Claro. Abre la app Alexa, ve a Más, Rutinas, y crea una nueva. En esa rutina, añade varias frases de activación: dime la hora, dime la hora bien, y cualquier otra que quieras. La acción es abrir Dime la Hora. Todo se hace en una sola rutina. Cuando lo tengas, puedes decirme listo onboarding.';
+        const speechOutput = 'Perfecto. Puedes pedirme ayuda con rutina y te explico con detalle. También puedes decirle directamente a Alexa: crea una rutina que se llame Dime la Hora, añade las frases que quieras y pon como acción abrir Dime la Hora. O si lo prefieres, hazlo en la app Alexa.';
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -294,7 +294,7 @@ const OnboardingRapidoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'OnboardingRapidoIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Vale, eso es fácil. Abre la app Alexa, ve a Más, Rutinas, y pulsa el más. Crea una rutina que lance Dime la Hora. Dentro de esa rutina puedes añadir varias frases: dime la hora, dime la hora bien, y las que quieras. Todo en una sola rutina. Cuando lo tengas, di listo onboarding.';
+        const speechOutput = 'Vale, es fácil. Salimos de esto y le dices a Alexa: crea una rutina que se llame Dime la Hora. Luego añade frases de activación como dime la hora, dime la hora bien, y las que quieras. Como acción: abre la skill Dime la Hora. Si prefieres hacerlo en la app, entra en Más, Rutinas, y crea una nueva con las mismas frases y acción. Cuando esté lista, di listo onboarding.';
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
