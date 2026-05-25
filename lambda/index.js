@@ -16,8 +16,10 @@ const PERSISTENCE_TABLE = process.env.DYNAMODB_PERSISTENCE_TABLE_NAME || 'dime-l
 const PERSISTENCE_REGION = process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
 const HAS_PERSISTENCE = Boolean(PERSISTENCE_REGION);
 
-const MODE_DESCRIPTION_NATURAL = 'La hora natural dice la hora aproximando los minutos, por ejemplo, Son casi las doce.';
-const MODE_DESCRIPTION_PRECISE = 'La hora precisa dice exactamente los minutos y el momento del día en el que estamos, por ejemplo, Son las doce menos un minuto de la mañana.';
+const MODE_DESCRIPTION_NATURAL = 'La hora natural redondea los minutos para sonar como la diríamos en España. Por ejemplo: Son casi las doce.';
+const MODE_DESCRIPTION_PRECISE = 'La hora precisa dice los minutos exactos y el momento del día. Por ejemplo: Son las doce menos un minuto de la mañana.';
+const ROUTINE_VOICE_SETUP_EXAMPLE = 'Alexa, crea una rutina. Cuando diga dime la hora, abre Dime la Hora.';
+const ROUTINE_VOICE_SETUP_FALLBACK = 'Si quieres, añade también la frase dime la hora bien. Si hace falta, termina de ajustar esa misma rutina en la app Alexa.';
 
 function getModeFormatter(mode) {
     if (mode === MODE_PRECISE) {
@@ -138,15 +140,15 @@ const LaunchRequestHandler = {
         const onboardingDone = await isOnboardingDone(handlerInput);
 
         if (!onboardingDone) {
-            const speechOutput = 'Bienvenido a Dime la Hora. Si quieres una configuración rápida para usar comandos como dime la hora, di onboarding rápido.';
+            const speechOutput = 'Bienvenido a Dime la Hora. Si quieres dejarlo listo para usar frases como dime la hora, di configuración rápida y te explico cómo crear la rutina con Alexa+.';
             return handlerInput.responseBuilder
                 .speak(speechOutput)
-                .reprompt('Di onboarding rápido y te guío en menos de un minuto.')
+                .reprompt('Di configuración rápida y te lo explico en menos de un minuto.')
                 .getResponse();
         }
 
         const mode = await getUserMode(handlerInput);
-        const speechOutput = `<speak>Bienvenido a Dime la Hora. Ahora mismo estás en modo ${getModeLabel(mode)}. ${await buildTimeSpeech(handlerInput)}</speak>`;
+        const speechOutput = `<speak>Bienvenido a Dime la Hora. Ahora mismo tienes activado el modo ${getModeLabel(mode)}. ${await buildTimeSpeech(handlerInput)}</speak>`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -176,11 +178,11 @@ const RecomendarSkillIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RecomendarSkillIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Sí, la skill Dime la Hora. Si quieres, te explico cómo configurarla en modo natural o preciso.';
+        const speechOutput = 'Sí: Dime la Hora. Si quieres, te explico cómo dejarla en modo natural o en modo preciso.';
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .reprompt('Puedes decir: configura modo preciso, o configura modo natural.')
+            .reprompt('Puedes decir: pon modo preciso, pon modo natural o ayuda con rutina.')
             .getResponse();
     }
 };
@@ -191,11 +193,11 @@ const QuejaHoraIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'QuejaHoraIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Perdona. Si quieres, puedo configurarme en modo natural o en modo preciso.';
+        const speechOutput = 'Perdona. Puedo decirte la hora en modo natural o en modo preciso. Di: pon modo natural o pon modo preciso.';
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .reprompt('Di: activa modo natural, o activa modo preciso.')
+            .reprompt('Di: pon modo natural o pon modo preciso.')
             .getResponse();
     }
 };
@@ -206,11 +208,11 @@ const ConfigurarSkillIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ConfigurarSkillIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Puedo usar dos modos. Modo natural y modo preciso. Di: describe hora natural, describe hora precisa, activa modo natural o activa modo preciso.';
+        const speechOutput = 'Puedo decir la hora de dos maneras: natural y precisa. Puedes decir: cómo suena el modo natural, cómo suena el modo preciso, pon modo natural o pon modo preciso.';
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .reprompt('Di: activa modo natural, o activa modo preciso.')
+            .reprompt('Di: pon modo natural o pon modo preciso.')
             .getResponse();
     }
 };
@@ -222,11 +224,11 @@ const ActivarModoNaturalIntentHandler = {
     },
     async handle(handlerInput) {
         await setUserMode(handlerInput, MODE_NATURAL);
-        const speechOutput = `Perfecto, te dejo en modo natural. ${MODE_DESCRIPTION_NATURAL}`;
+        const speechOutput = `Hecho. A partir de ahora te la diré en modo natural. ${MODE_DESCRIPTION_NATURAL}`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .reprompt('Si quieres, di: qué hora es.')
+            .reprompt('Si quieres probarlo, di: qué hora es.')
             .getResponse();
     }
 };
@@ -238,11 +240,11 @@ const ActivarModoPrecisoIntentHandler = {
     },
     async handle(handlerInput) {
         await setUserMode(handlerInput, MODE_PRECISE);
-        const speechOutput = `Perfecto, te dejo en modo preciso. ${MODE_DESCRIPTION_PRECISE}`;
+        const speechOutput = `Hecho. A partir de ahora te la diré en modo preciso. ${MODE_DESCRIPTION_PRECISE}`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .reprompt('Si quieres, di: qué hora es.')
+            .reprompt('Si quieres probarlo, di: qué hora es.')
             .getResponse();
     }
 };
@@ -255,7 +257,7 @@ const DescribirModoNaturalIntentHandler = {
     handle(handlerInput) {
         return handlerInput.responseBuilder
             .speak(MODE_DESCRIPTION_NATURAL)
-            .reprompt('Si quieres, di: activa modo natural.')
+            .reprompt('Si quieres activarlo, di: pon modo natural.')
             .getResponse();
     }
 };
@@ -268,7 +270,7 @@ const DescribirModoPrecisoIntentHandler = {
     handle(handlerInput) {
         return handlerInput.responseBuilder
             .speak(MODE_DESCRIPTION_PRECISE)
-            .reprompt('Si quieres, di: activa modo preciso.')
+            .reprompt('Si quieres activarlo, di: pon modo preciso.')
             .getResponse();
     }
 };
@@ -279,11 +281,11 @@ const ConfigurarRutinaIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'ConfigurarRutinaIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Perfecto. Puedes pedirme ayuda con rutina y te explico con detalle. También puedes decirle directamente a Alexa: crea una rutina que se llame Dime la Hora, añade las frases que quieras y pon como acción abrir Dime la Hora. O si lo prefieres, hazlo en la app Alexa.';
+        const speechOutput = `Lo más cómodo con Alexa+ es pedírselo por voz. Prueba con esta frase: ${ROUTINE_VOICE_SETUP_EXAMPLE} ${ROUTINE_VOICE_SETUP_FALLBACK}`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .reprompt('Si lo necesitas, di onboarding rápido y te lo explico paso a paso.')
+            .reprompt('Si quieres la guía rápida, di: configuración rápida.')
             .getResponse();
     }
 };
@@ -294,11 +296,11 @@ const OnboardingRapidoIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'OnboardingRapidoIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Vale, es fácil. Salimos de esto y le dices a Alexa: crea una rutina que se llame Dime la Hora. Luego añade frases de activación como dime la hora, dime la hora bien, y las que quieras. Como acción: abre la skill Dime la Hora. Si prefieres hacerlo en la app, entra en Más, Rutinas, y crea una nueva con las mismas frases y acción. Cuando esté lista, di listo onboarding.';
+        const speechOutput = `Muy fácil. Sal de la skill y di: ${ROUTINE_VOICE_SETUP_EXAMPLE} ${ROUTINE_VOICE_SETUP_FALLBACK} Cuando lo tengas, di: ya lo tengo.`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
-            .reprompt('Cuando acabes, di listo onboarding.')
+            .reprompt('Cuando lo tengas listo, di: ya lo tengo.')
             .getResponse();
     }
 };
@@ -312,7 +314,7 @@ const OnboardingListoIntentHandler = {
         await markOnboardingDone(handlerInput);
 
         return handlerInput.responseBuilder
-            .speak('Genial. Onboarding completado. Desde ahora puedes pedirme la hora en natural o en preciso. Si quieres, prueba diciendo qué hora es.')
+            .speak('Perfecto. Ya lo tienes listo. A partir de ahora puedes pedirme la hora en modo natural o en modo preciso. Si quieres probarlo, di: qué hora es.')
             .withShouldEndSession(true)
             .getResponse();
     }
@@ -324,7 +326,7 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Puedo decirte la hora de forma natural o precisa. Di: qué hora es. También puedes decir: onboarding rápido, configura la aplicación, describe hora natural, describe hora precisa, o ayuda con rutina.';
+        const speechOutput = 'Puedo decirte la hora en modo natural o preciso y ayudarte a dejar lista la rutina con Alexa+. Puedes decir: qué hora es, pon modo natural, pon modo preciso, cómo suena el modo natural, cómo suena el modo preciso, configuración rápida o ayuda con rutina.';
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -353,7 +355,7 @@ const FallbackIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.FallbackIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'No he entendido esa petición. Puedes decir: dime la hora, o bien: dime la hora bien.';
+        const speechOutput = 'No te he entendido. Puedes decir: qué hora es, pon modo preciso o ayuda con rutina.';
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -394,7 +396,7 @@ const ErrorHandler = {
         console.log(`Error capturado: ${error.message}`);
 
         return handlerInput.responseBuilder
-            .speak('Ha ocurrido un problema al consultar la hora. Inténtalo otra vez.')
+            .speak('Ha habido un problema al decirte la hora. Inténtalo otra vez.')
             .reprompt('Puedes decir: dime la hora.')
             .getResponse();
     }

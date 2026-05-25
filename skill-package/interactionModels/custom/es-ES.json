@@ -67,6 +67,8 @@
             "configura la aplicación",
             "quiero configurar la aplicación",
             "quiero configurar la skill",
+            "quiero configurar dime la hora",
+            "cómo puedo configurarla",
             "puedes decir la hora de manera natural",
             "quiero que digas la hora de manera natural",
             "puedes decir la hora de manera precisa",
@@ -81,7 +83,10 @@
           "samples": [
             "activa modo natural",
             "pon modo natural",
+            "pon el modo natural",
+            "ponlo en natural",
             "quiero hora natural",
+            "quiero que me la digas de forma natural",
             "no seas tan preciso"
           ]
         },
@@ -91,7 +96,11 @@
           "samples": [
             "activa modo preciso",
             "pon modo preciso",
+            "pon el modo preciso",
+            "ponlo en preciso",
             "quiero hora precisa",
+            "quiero la hora exacta",
+            "quiero que me la digas exacta",
             "quiero que seas precisa",
             "quiero que digas la hora de manera precisa"
           ]
@@ -103,6 +112,8 @@
             "describe la hora natural",
             "que es la hora natural",
             "como funciona la hora natural",
+            "como suena el modo natural",
+            "explícame el modo natural",
             "cómo dices la hora de manera natural"
           ]
         },
@@ -113,6 +124,8 @@
             "describe la hora precisa",
             "que es la hora precisa",
             "como funciona la hora precisa",
+            "como suena el modo preciso",
+            "explícame el modo preciso",
             "cómo dices la hora de manera precisa"
           ]
         },
@@ -121,11 +134,14 @@
           "slots": [],
           "samples": [
             "ayuda con rutina",
+            "ayúdame con la rutina",
             "como creo una rutina",
             "cómo creo una rutina",
             "configura una rutina",
+            "quiero crear la rutina",
             "quiero una rutina para decir la hora",
             "explica como crear una rutina",
+            "dime cómo crear la rutina",
             "quiero que siempre me digas la hora usando esta skill",
             "quiero que siempre me digas la hora usando esta aplicación"
           ]
@@ -140,6 +156,8 @@
             "configuración rápida",
             "quiero configuracion rapida",
             "quiero configuración rápida",
+            "ayúdame a configurarlo",
+            "guíame",
             "configurar todo rapido",
             "configurar todo rápido"
           ]
@@ -149,8 +167,9 @@
           "slots": [],
           "samples": [
             "listo onboarding",
-            "ya esta onboarding",
-            "ya está onboarding",
+            "ya lo tengo",
+            "ya he terminado",
+            "configuración terminada",
             "he terminado onboarding",
             "onboarding completado"
           ]

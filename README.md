@@ -1,19 +1,19 @@
 # Dime la Hora
 
-Skill Alexa en castellano que dice la hora de forma natural, como se habla en España.
+Skill Alexa en castellano para escuchar la hora como la diríamos en España.
 
 ## Para usuarios
 
 Si ya tienes la skill instalada:
 - Di: **"Alexa, abre dime la hora"** para que te diga la hora.
-- Di: **"onboarding rápido"** si es tu primera vez y quieres configurar rutinas.
-- Di: **"ayuda con rutina"** para crear una rutina que lancé la skill con comandos como "dime la hora".
+- Di: **"configuración rápida"** si es tu primera vez y quieres que te diga qué pedirle a Alexa+ para crear la rutina por voz.
+- Di: **"ayuda con rutina"** si quieres la frase corta para crear la rutina o rematarla en la app.
 
 Más detalles en los ejemplos de uso al final.
 
-## Para developers
+## Para desarrolladores
 
-Este repositorio contiene una skill Alexa custom en formato Alexa-hosted, lista para importar desde GitHub en la consola de Amazon.
+Este repositorio contiene una skill Alexa custom en formato Alexa-hosted, lista para importarse desde GitHub en la consola de Amazon.
 
 ### Estructura del proyecto
 
@@ -42,7 +42,7 @@ Este repositorio contiene una skill Alexa custom en formato Alexa-hosted, lista 
   - `skill-package/skill.json` (manifest)
   - `skill-package/interactionModels/custom/es-ES.json` (modelo)
 
-### Deployment en Alexa-hosted
+### Importación en Alexa-hosted
 
 1. En la **Alexa Developer Console** (https://developer.amazon.com/alexa/console/ask).
 2. Crear skill nueva → Modelo: **Custom** → Hosting: **Alexa-Hosted (Node.js)**.
@@ -53,7 +53,7 @@ Este repositorio contiene una skill Alexa custom en formato Alexa-hosted, lista 
 
 ### Desarrollo local
 
-**Tests:**
+**Pruebas:**
 ```bash
 cd lambda
 npm install
@@ -84,7 +84,7 @@ npm run check  # Verifica que el handler carga correctamente
 - `OnboardingRapidoIntent`, `OnboardingListoIntent`: Flujo de onboarding guiado.
 - `RecomendarSkillIntent`, `QuejaHoraIntent`: Respuestas contextuales.
 
-### Customización
+### Personalización
 
 - **Invocation name**: `skill-package/interactionModels/custom/es-ES.json` (línea `invocationName`).
 - **Textos de respuesta**: `lambda/index.js` (handlers, `speechOutput`).
@@ -99,19 +99,20 @@ npm run check  # Verifica que el handler carga correctamente
 - "Alexa, dile a dime la hora que me diga la hora"
 
 **Cambiar modo:**
-- "Alexa, dile a dime la hora que active modo preciso"
-- "Alexa, dile a dime la hora que active modo natural"
+- "Alexa, dile a dime la hora que ponga el modo preciso"
+- "Alexa, dile a dime la hora que ponga el modo natural"
 
 **Describir modos:**
-- "Alexa, dile a dime la hora que describe la hora natural"
-- "Alexa, dile a dime la hora que describe la hora precisa"
+- "Alexa, dile a dime la hora cómo suena el modo natural"
+- "Alexa, dile a dime la hora cómo suena el modo preciso"
 
 **Onboarding y rutinas:**
-- "Alexa, abre dime la hora" → "onboarding rápido"
-- "Alexa, dile a dime la hora que ayuda con rutina"
+- "Alexa, abre dime la hora" → "configuración rápida"
+- "Alexa, dile a dime la hora ayuda con rutina"
 - "Alexa, dile a dime la hora que configura la aplicación"
+- Fuera de la skill, prueba: "Alexa, crea una rutina. Cuando diga dime la hora, abre Dime la Hora"
 
-### Tests y calidad
+### Pruebas y calidad
 
 La suite cubre:
 - Transiciones de minuto (comportamiento por bloques de 5 min).
@@ -127,7 +128,7 @@ Ejecuta `npm test` para verificar:
 ### Limitaciones conocidas
 
 - Una skill custom no puede interceptar globalmente frases como "Alexa, qué hora es" (eso lo resuelve Alexa nativa).
-- Las skills no tienen API para crear rutinas automáticamente; se recomienda usar rutinas manuales en Alexa+.
+- La skill no puede crear rutinas por API ni ordenarle a Alexa+ que las cree por sí sola; el usuario tiene que pedírselo a Alexa+ o terminarlo en la app.
 - Persistencia de preferencias requiere DynamoDB en entorno Alexa-hosted.
 
 ### Licencia
