@@ -60,21 +60,23 @@ Importante: una skill custom no puede interceptar de forma global frases como `A
 
 ## Uso con rutinas (recomendado)
 
-Puedes lograr una experiencia casi global con dos rutinas en la app Alexa:
+Puedes lograr una experiencia casi global con una sola rutina en la app Alexa:
 
-1. Frase: `dime la hora` -> accion: abrir skill `Dime la Hora`
-2. Frase: `dime la hora bien` -> accion: abrir skill `Dime la Hora`
+1. En Rutinas, crea una nueva
+2. Añade varias frases de activación: `dime la hora`, `dime la hora bien`, y otras que quieras
+3. Como accion: abrir skill `Dime la Hora`
 
-La skill puede guiar estos pasos si dices: `ayuda con rutina`.
+Todo en una sola rutina. La skill puede guiarte si dices: `ayuda con rutina`.
 
 ## Onboarding por voz
 
-En el primer arranque, la skill propone configuracion guiada.
+En el primer arranque, la skill te guia en la configuracion.
 
-- Di: `onboarding rapido` para oir los pasos cortos
+- Di: `onboarding rapido` para escuchar los pasos
+- Crea una rutina en la app Alexa con las frases que quieras
 - Cuando termines, di: `listo onboarding`
 
-Esto marca el onboarding como completado y deja la experiencia normal de uso para las siguientes aperturas.
+Esto marca el setup como completado y la proxima vez que abras la skill te dara la hora directamente.
 
 Nota: las skills custom no pueden crear rutinas automaticamente por API ni sustituir la respuesta nativa de Alexa para `que hora es`.
 
