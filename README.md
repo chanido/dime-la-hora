@@ -1,110 +1,136 @@
 # Dime la Hora
 
-Skill custom de Alexa en castellano para decir la hora actual.
+Skill Alexa en castellano que dice la hora de forma natural, como se habla en España.
 
-La estructura del proyecto sigue el formato que Amazon acepta para importar una skill Alexa-hosted desde un repositorio publico de GitHub.
+## Para usuarios
 
-## Estructura
+Si ya tienes la skill instalada:
+- Di: **"Alexa, abre dime la hora"** para que te diga la hora.
+- Di: **"onboarding rápido"** si es tu primera vez y quieres configurar rutinas.
+- Di: **"ayuda con rutina"** para crear una rutina que lancé la skill con comandos como "dime la hora".
 
-- `lambda/`: backend Node.js con el handler `index.js`
-- `skill-package/`: manifest de la skill y modelo de interaccion
+Más detalles en los ejemplos de uso al final.
 
-## Requisitos de importacion en Amazon
+## Para developers
 
-- El repositorio debe ser publico.
-- El backend debe ser Node.js o Python.
-- El handler debe llamarse `index.js` para Node.js.
-- El repo debe incluir `skill-package/skill.json` y `skill-package/interactionModels/custom/<locale>.json`.
+Este repositorio contiene una skill Alexa custom en formato Alexa-hosted, lista para importar desde GitHub en la consola de Amazon.
 
-## Publicar en GitHub
+### Estructura del proyecto
 
-Desde esta carpeta:
-
-```bash
-git init
-git add .
-git commit -m "Initial Alexa skill"
-gh repo create dime-la-hora --public --source=. --remote=origin --push
+```
+.
+├── lambda/
+│   ├── index.js                    # Handler principal de la skill
+│   ├── package.json                # Dependencias (ask-sdk-core)
+│   ├── natural/                    # Formatter de hora natural (bloques de 5 min)
+│   ├── preciso/                    # Formatter de hora precisa (minutos exactos)
+│   ├── shared/                     # Utilities compartidas (timezone, formato base)
+│   └── *.test.js                   # Suites de tests (34 casos de cobertura)
+└── skill-package/
+    ├── skill.json                  # Manifest y metadata de la skill
+    └── interactionModels/
+        └── custom/
+            └── es-ES.json          # Modelo de interacción (intents, utterances)
 ```
 
-Si prefieres crear el repo manualmente en GitHub, crea un repositorio publico vacio y luego ejecuta:
+### Requisitos de importación
 
-```bash
-git init
-git add .
-git commit -m "Initial Alexa skill"
-git remote add origin https://github.com/TU_USUARIO/dime-la-hora.git
-git push -u origin main
-```
+- Repositorio público en GitHub.
+- Backend: Node.js o Python.
+- Archivos requeridos:
+  - `lambda/index.js` (handler)
+  - `skill-package/skill.json` (manifest)
+  - `skill-package/interactionModels/custom/es-ES.json` (modelo)
 
-## Importar en la consola de Alexa
+### Deployment en Alexa-hosted
 
-1. Entra en la Alexa Developer Console.
-2. Crea una skill nueva.
-3. Elige `Custom` como modelo.
-4. Elige `Alexa-Hosted (Node.js)` como hosting.
-5. Pulsa `Import Skill`.
-6. Pega la URL `.git` del repo publico.
-7. Usa `Spanish (ES)` como idioma por defecto.
+1. En la **Alexa Developer Console** (https://developer.amazon.com/alexa/console/ask).
+2. Crear skill nueva → Modelo: **Custom** → Hosting: **Alexa-Hosted (Node.js)**.
+3. Pulsar **Import Skill**.
+4. Pegar URL `.git` de tu repo público.
+5. Esperar a que se construya e importe (2-3 minutos).
+6. Usar idioma: **Spanish (ES)**.
 
-## Comportamiento actual
+### Desarrollo local
 
-- Usa la zona horaria del dispositivo desde el que se invoca
-- Modo por defecto: `natural` (redondea por bloques de 5 minutos con formulas como `casi` y `pasadas`)
-- Modo opcional: `preciso` (dice los minutos exactos y la parte del dia)
-- Puedes cambiar de modo por voz con: `activa modo natural` o `activa modo preciso`
-- Puedes pedir descripcion por voz con: `describe la hora natural` o `describe la hora precisa`
-- El modo queda guardado por usuario cuando hay persistencia de Alexa-hosted (DynamoDB); en local sin AWS se mantiene por sesion
-
-Importante: una skill custom no puede interceptar de forma global frases como `Alexa, que hora es` si no se invoca la skill. Para esos casos hay que usar la forma con invocacion, por ejemplo: `Alexa, pregunta a dime la hora que hora es`.
-
-## Uso con rutinas (recomendado)
-
-Puedes lograr una experiencia casi global con una sola rutina en Alexa+:
-
-**Opción 1: Por voz (más fácil)**
-Dile a Alexa: "Crea una rutina que se llame Dime la Hora". Añade varias frases de activación: `dime la hora`, `dime la hora bien`, y otras que quieras. Como acción: abre skill `Dime la Hora`.
-
-**Opción 2: En la app**
-Entra en Más, Rutinas, crea una nueva. Añade las mismas frases y acción.
-
-La skill puede guiarte si dices: `ayuda con rutina`.
-
-## Onboarding por voz
-
-En el primer arranque, la skill te guia en la configuracion.
-
-- Di: `onboarding rapido` para escuchar los pasos
-- Crea una rutina en la app Alexa con las frases que quieras
-- Cuando termines, di: `listo onboarding`
-
-Esto marca el setup como completado y la proxima vez que abras la skill te dara la hora directamente.
-
-Nota: las skills custom no pueden crear rutinas automaticamente por API ni sustituir la respuesta nativa de Alexa para `que hora es`.
-
-## Personalizacion rapida
-
-- Invocation name: `skill-package/interactionModels/custom/es-ES.json`
-- Textos del backend: `lambda/index.js`
-- Zona horaria: la skill usa la configurada en el dispositivo desde el que se invoca
-- Fallback: si Alexa no devuelve la zona horaria del dispositivo, cae a `TIME_ZONE` o `Europe/Madrid`
-- Reglas de lenguaje natural activas: `lambda/natural/timeFormatter.js`
-- Variante exacta anterior: `lambda/preciso/timeFormatter.js`
-
-## Pruebas locales
-
+**Tests:**
 ```bash
 cd lambda
 npm install
-npm test
+npm test  # Ejecuta 34 tests de cobertura
 ```
 
-Los tests cubren casos representativos de habla natural en España, incluyendo transiciones por bloques de 5 minutos, uso de `casi`/`pasadas` y casos exactos como `y cuarto`, `y media` y `menos cuarto`.
+**Validación:**
+```bash
+npm run check  # Verifica que el handler carga correctamente
+```
 
-## Ejemplos de uso
+### Arquitectura
 
+**Modos de hora:**
+- **Natural** (por defecto): "Son casi las doce", "Son las doce y cinco", "Son las doce menos cuarto".
+- **Preciso**: "Son las once y cincuenta y dos minutos de la mañana".
+
+**Configuración:**
+- Detecta la zona horaria del dispositivo vía UPS Service Client (fallback: Europe/Madrid).
+- Almacena preferencia de modo por usuario en DynamoDB (Alexa-hosted) o sesión (local).
+- Marca onboarding completado para evitar repetir guía.
+
+**Intents implementados:**
+- `HoraActualIntent`: Decir la hora.
+- `ActivarModoNaturalIntent`, `ActivarModoPrecisoIntent`: Cambiar modo.
+- `DescribirModoNaturalIntent`, `DescribirModoPrecisoIntent`: Explicar modos.
+- `ConfigurarSkillIntent`, `ConfigurarRutinaIntent`: Pedir ayuda de configuración.
+- `OnboardingRapidoIntent`, `OnboardingListoIntent`: Flujo de onboarding guiado.
+- `RecomendarSkillIntent`, `QuejaHoraIntent`: Respuestas contextuales.
+
+### Customización
+
+- **Invocation name**: `skill-package/interactionModels/custom/es-ES.json` (línea `invocationName`).
+- **Textos de respuesta**: `lambda/index.js` (handlers, `speechOutput`).
+- **Reglas de formato**: `lambda/natural/timeFormatter.js` y `lambda/preciso/timeFormatter.js`.
+- **Zona horaria por defecto**: `lambda/shared/timeCore.js` (`resolveFallbackTimeZone`).
+
+### Ejemplos de uso
+
+**Invocar y pedir hora:**
 - "Alexa, abre dime la hora"
 - "Alexa, pregunta a dime la hora qué hora es"
-- "Alexa, dile a dime la hora que configure la aplicación"
+- "Alexa, dile a dime la hora que me diga la hora"
+
+**Cambiar modo:**
 - "Alexa, dile a dime la hora que active modo preciso"
+- "Alexa, dile a dime la hora que active modo natural"
+
+**Describir modos:**
 - "Alexa, dile a dime la hora que describe la hora natural"
+- "Alexa, dile a dime la hora que describe la hora precisa"
+
+**Onboarding y rutinas:**
+- "Alexa, abre dime la hora" → "onboarding rápido"
+- "Alexa, dile a dime la hora que ayuda con rutina"
+- "Alexa, dile a dime la hora que configura la aplicación"
+
+### Tests y calidad
+
+La suite cubre:
+- Transiciones de minuto (comportamiento por bloques de 5 min).
+- Fronteras de parte del día (madrugada, mañana, mediodía, tarde, noche).
+- Casos exactos (y cuarto, y media, menos cuarto).
+- Restricciones de modo natural (sin parte del día repetida innecesariamente).
+
+Ejecuta `npm test` para verificar:
+```
+✔ 34 tests passed
+```
+
+### Limitaciones conocidas
+
+- Una skill custom no puede interceptar globalmente frases como "Alexa, qué hora es" (eso lo resuelve Alexa nativa).
+- Las skills no tienen API para crear rutinas automáticamente; se recomienda usar rutinas manuales en Alexa+.
+- Persistencia de preferencias requiere DynamoDB en entorno Alexa-hosted.
+
+### Licencia
+
+MIT (o ajusta según tus necesidades).
+

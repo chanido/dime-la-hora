@@ -19,18 +19,26 @@
       "isAvailableWorldwide": true,
       "locales": {
         "es-ES": {
-          "description": "Skill en castellano que dice la hora en modo natural o modo preciso, configurable por voz.",
+          "description": "Dime la Hora te dice qué hora es como lo haría alguien en España. Puedes usar dos modos: natural (aproximado, como 'casi las doce') o preciso (minutos exactos, como 'las once y cincuenta y dos'). Configurable por voz. Ideal para usar con rutinas en Alexa+.",
           "examplePhrases": [
             "Alexa, abre dime la hora",
             "Alexa, pregunta a dime la hora qué hora es",
-            "Alexa, dile a dime la hora que configure la aplicación"
+            "Alexa, dile a dime la hora que active modo preciso",
+            "Alexa, dile a dime la hora que ayuda con rutina"
           ],
-          "keywords": [],
+          "keywords": [
+            "hora",
+            "castellano",
+            "español",
+            "natural",
+            "preciso",
+            "rutina"
+          ],
           "name": "Dime la Hora",
-          "summary": "Di la hora actual en castellano con modo natural o preciso."
+          "summary": "Escucha la hora en castellano, natural o precisa, configurable por voz."
         }
       },
-      "testingInstructions": "1) Di 'Alexa, abre dime la hora'. 2) Di 'Alexa, pregunta a dime la hora qué hora es'. 3) Di 'Alexa, dile a dime la hora que configure la aplicación'. 4) Di 'Alexa, dile a dime la hora que active modo preciso'."
+      "testingInstructions": "PRIMERA VEZ (Onboarding):\n1. Di: 'Alexa, abre dime la hora'\n2. La skill te explicará el primer arranque\n3. Di: 'onboarding rápido' para escuchar cómo crear una rutina\n4. Di: 'listo onboarding' cuando termines\n\nPRUEBA DE MODOS:\n5. Di: 'Alexa, pregunta a dime la hora qué hora es' (modo natural)\n6. Di: 'Alexa, dile a dime la hora que active modo preciso'\n7. Di: 'Alexa, pregunta a dime la hora qué hora es' (modo preciso)\n8. Di: 'Alexa, dile a dime la hora que describe la hora natural'\n\nCONFIGURACIÓN DE RUTINA (Alexa+):\n9. Fuera de esta skill, di: 'Alexa, crea una rutina'\n10. Pon como disparador: 'dime la hora'\n11. Pon como acción: abrir Dime la Hora\n12. Di: 'Alexa, dime la hora' para comprobar que funciona\n\nAYUDA EXTRA:\n13. Di: 'Alexa, dile a dime la hora que ayuda con rutina' (si necesitas instrucciones detalladas)\n14. Di: 'Alexa, dile a dime la hora que describe la hora precisa' (para conocer el otro modo)"
     }
   }
 }
