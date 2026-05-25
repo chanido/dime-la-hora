@@ -1,11 +1,11 @@
-# Dime la Hora
+# Hora Natural en Castellano
 
 Skill Alexa en castellano para escuchar la hora como la diríamos en España.
 
 ## Para usuarios
 
 Si ya tienes la skill instalada:
-- Di: **"Alexa, abre dime la hora"** para que te diga la hora.
+- Di: **"Alexa, abre hora natural en castellano"** para que te diga la hora.
 - Di: **"configuración rápida"** si es tu primera vez y quieres que te diga qué pedirle a Alexa+ para crear la rutina por voz.
 - Di: **"ayuda con rutina"** si quieres la frase corta para crear la rutina o rematarla en la app.
 
@@ -94,23 +94,23 @@ npm run check  # Verifica que el handler carga correctamente
 ### Ejemplos de uso
 
 **Invocar y pedir hora:**
-- "Alexa, abre dime la hora"
-- "Alexa, pregunta a dime la hora qué hora es"
-- "Alexa, dile a dime la hora que me diga la hora"
+- "Alexa, abre hora natural en castellano"
+- "Alexa, pregunta a hora natural en castellano qué hora es"
+- "Alexa, dile a hora natural en castellano que me diga la hora"
 
 **Cambiar modo:**
-- "Alexa, dile a dime la hora que ponga el modo preciso"
-- "Alexa, dile a dime la hora que ponga el modo natural"
+- "Alexa, dile a hora natural en castellano que ponga el modo preciso"
+- "Alexa, dile a hora natural en castellano que ponga el modo natural"
 
 **Describir modos:**
-- "Alexa, dile a dime la hora cómo suena el modo natural"
-- "Alexa, dile a dime la hora cómo suena el modo preciso"
+- "Alexa, dile a hora natural en castellano cómo suena el modo natural"
+- "Alexa, dile a hora natural en castellano cómo suena el modo preciso"
 
 **Onboarding y rutinas:**
-- "Alexa, abre dime la hora" → "configuración rápida"
-- "Alexa, dile a dime la hora ayuda con rutina"
-- "Alexa, dile a dime la hora que configura la aplicación"
-- Fuera de la skill, prueba: "Alexa, crea una rutina. Cuando diga dime la hora, abre Dime la Hora"
+- "Alexa, abre hora natural en castellano" → "configuración rápida"
+- "Alexa, dile a hora natural en castellano ayuda con rutina"
+- "Alexa, dile a hora natural en castellano que configura la aplicación"
+- Fuera de la skill, prueba: "Alexa, crea una rutina. Cuando diga dime la hora, abre Hora Natural en Castellano"
 
 ### Pruebas y calidad
 

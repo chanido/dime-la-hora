@@ -16,10 +16,11 @@ const ONBOARDING_DONE_KEY = 'onboardingDone';
 const PERSISTENCE_TABLE = process.env.DYNAMODB_PERSISTENCE_TABLE_NAME;
 const PERSISTENCE_REGION = process.env.DYNAMODB_PERSISTENCE_REGION || process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
 const HAS_PERSISTENCE = Boolean(PERSISTENCE_TABLE && PERSISTENCE_REGION);
+const SKILL_NAME = 'Hora Natural en Castellano';
 
 const MODE_DESCRIPTION_NATURAL = 'La hora natural redondea los minutos para sonar como la diríamos en España. Por ejemplo: Son casi las doce.';
 const MODE_DESCRIPTION_PRECISE = 'La hora precisa dice los minutos exactos y el momento del día. Por ejemplo: Son las doce menos un minuto de la mañana.';
-const ROUTINE_VOICE_SETUP_EXAMPLE = 'Alexa, crea una rutina. Cuando diga dime la hora, abre Dime la Hora.';
+const ROUTINE_VOICE_SETUP_EXAMPLE = `Alexa, crea una rutina. Cuando diga dime la hora, abre ${SKILL_NAME}.`;
 const ROUTINE_VOICE_SETUP_FALLBACK = 'Si quieres, añade también la frase dime la hora bien. Si hace falta, termina de ajustar esa misma rutina en la app Alexa.';
 
 function getModeFormatter(mode) {
@@ -141,7 +142,7 @@ const LaunchRequestHandler = {
         const onboardingDone = await isOnboardingDone(handlerInput);
 
         if (!onboardingDone) {
-            const speechOutput = 'Bienvenido a Dime la Hora. Si quieres dejarlo listo para usar frases como dime la hora, di configuración rápida y te explico cómo crear la rutina con Alexa+.';
+            const speechOutput = `Bienvenido a ${SKILL_NAME}. Si quieres dejarlo listo para usar con una rutina, di configuración rápida y te explico cómo crearla con Alexa+.`;
             return handlerInput.responseBuilder
                 .speak(speechOutput)
                 .reprompt('Di configuración rápida y te lo explico en menos de un minuto.')
@@ -149,7 +150,7 @@ const LaunchRequestHandler = {
         }
 
         const mode = await getUserMode(handlerInput);
-        const speechOutput = `<speak>Bienvenido a Dime la Hora. Ahora mismo tienes activado el modo ${getModeLabel(mode)}. ${await buildTimeSpeech(handlerInput)}</speak>`;
+        const speechOutput = `<speak>Bienvenido a ${SKILL_NAME}. Ahora mismo tienes activado el modo ${getModeLabel(mode)}. ${await buildTimeSpeech(handlerInput)}</speak>`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -179,7 +180,7 @@ const RecomendarSkillIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'RecomendarSkillIntent';
     },
     handle(handlerInput) {
-        const speechOutput = 'Sí: Dime la Hora. Si quieres, te explico cómo dejarla en modo natural o en modo preciso.';
+        const speechOutput = `Sí: ${SKILL_NAME}. Si quieres, te explico cómo dejarla en modo natural o en modo preciso.`;
 
         return handlerInput.responseBuilder
             .speak(speechOutput)
@@ -398,7 +399,7 @@ const ErrorHandler = {
 
         return handlerInput.responseBuilder
             .speak('Ha habido un problema al decirte la hora. Inténtalo otra vez.')
-            .reprompt('Puedes decir: dime la hora.')
+            .reprompt('Puedes decir: qué hora es.')
             .getResponse();
     }
 };
