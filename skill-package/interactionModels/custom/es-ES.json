@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "hora castellana",
+      "invocationName": "hora en castellano",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -28,6 +28,7 @@
           "slots": [],
           "samples": [
             "dime la hora",
+            "dime la hora bien",
             "que hora es",
             "qué hora es",
             "dame la hora",

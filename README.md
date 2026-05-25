@@ -47,12 +47,19 @@ git push -u origin main
 6. Pega la URL `.git` del repo publico.
 7. Usa `Spanish (ES)` como idioma por defecto.
 
+## Comportamiento actual
+
+- Usa la zona horaria del dispositivo desde el que se invoca
+- Dice la hora en castellano natural, con formulas como `y cuarto`, `y media` y `menos cuarto`
+- Ajusta la franja del dia con expresiones como `de la mañana`, `de la tarde` o `de la noche`
+
 ## Personalizacion rapida
 
 - Invocation name: `skill-package/interactionModels/custom/es-ES.json`
 - Textos del backend: `lambda/index.js`
 - Zona horaria: la skill usa la configurada en el dispositivo desde el que se invoca
 - Fallback: si Alexa no devuelve la zona horaria del dispositivo, cae a `TIME_ZONE` o `Europe/Madrid`
+- Reglas de lenguaje natural: `lambda/timeFormatter.js`
 
 ## Pruebas locales
 
@@ -62,8 +69,10 @@ npm install
 npm test
 ```
 
+Los tests cubren casos representativos de habla natural en España, incluyendo `y cuarto`, `y media`, `menos veinte`, `menos cuarto`, mediodia y cambios de franja del dia.
+
 ## Ejemplos de uso
 
-- "Alexa, abre hora castellana"
-- "Alexa, pregunta a hora castellana que hora es"
-- "Alexa, dile a hora castellana que me diga la hora"
+- "Alexa, abre hora en castellano"
+- "Alexa, pregunta a hora en castellano qué hora es"
+- "Alexa, dile a hora en castellano que me diga la hora bien"
