@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "hora natural en castellano",
+      "invocationName": "hora natural",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -67,7 +67,7 @@
             "configura la aplicación",
             "quiero configurar la aplicación",
             "quiero configurar la skill",
-            "quiero configurar hora natural en castellano",
+            "quiero configurar hora natural",
             "cómo puedo configurarla",
             "puedes decir la hora de manera natural",
             "quiero que digas la hora de manera natural",
