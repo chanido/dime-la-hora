@@ -50,9 +50,33 @@ git push -u origin main
 ## Comportamiento actual
 
 - Usa la zona horaria del dispositivo desde el que se invoca
-- Dice la hora en castellano natural y redondea por bloques de 5 minutos con formulas como `casi` y `pasadas`
-- No añade la parte del dia (`de la mañana`, `de la tarde`, etc.)
-- Mantiene exactitud cuando cae exactamente en el minuto (`y cuarto`, `y media`, `menos cuarto`)
+- Modo por defecto: `natural` (redondea por bloques de 5 minutos con formulas como `casi` y `pasadas`)
+- Modo opcional: `preciso` (dice los minutos exactos y la parte del dia)
+- Puedes cambiar de modo por voz con: `activa modo natural` o `activa modo preciso`
+- Puedes pedir descripcion por voz con: `describe la hora natural` o `describe la hora precisa`
+- El modo queda guardado por usuario cuando hay persistencia de Alexa-hosted (DynamoDB); en local sin AWS se mantiene por sesion
+
+Importante: una skill custom no puede interceptar de forma global frases como `Alexa, que hora es` si no se invoca la skill. Para esos casos hay que usar la forma con invocacion, por ejemplo: `Alexa, pregunta a dime la hora que hora es`.
+
+## Uso con rutinas (recomendado)
+
+Puedes lograr una experiencia casi global con dos rutinas en la app Alexa:
+
+1. Frase: `dime la hora` -> accion: abrir skill `Dime la Hora`
+2. Frase: `dime la hora bien` -> accion: abrir skill `Dime la Hora`
+
+La skill puede guiar estos pasos si dices: `ayuda con rutina`.
+
+## Onboarding por voz
+
+En el primer arranque, la skill propone configuracion guiada.
+
+- Di: `onboarding rapido` para oir los pasos cortos
+- Cuando termines, di: `listo onboarding`
+
+Esto marca el onboarding como completado y deja la experiencia normal de uso para las siguientes aperturas.
+
+Nota: las skills custom no pueden crear rutinas automaticamente por API ni sustituir la respuesta nativa de Alexa para `que hora es`.
 
 ## Personalizacion rapida
 
@@ -75,6 +99,8 @@ Los tests cubren casos representativos de habla natural en España, incluyendo t
 
 ## Ejemplos de uso
 
-- "Alexa, abre hora en castellano"
-- "Alexa, pregunta a hora en castellano qué hora es"
-- "Alexa, dile a hora en castellano que me diga la hora bien"
+- "Alexa, abre dime la hora"
+- "Alexa, pregunta a dime la hora qué hora es"
+- "Alexa, dile a dime la hora que configure la aplicación"
+- "Alexa, dile a dime la hora que active modo preciso"
+- "Alexa, dile a dime la hora que describe la hora natural"

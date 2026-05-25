@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "hora en castellano",
+      "invocationName": "dime la hora",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -35,6 +35,124 @@
             "me dices la hora",
             "quiero saber la hora",
             "dime la hora actual"
+          ]
+        },
+        {
+          "name": "RecomendarSkillIntent",
+          "slots": [],
+          "samples": [
+            "hay alguna skill para decir la hora",
+            "hay una skill para decir la hora",
+            "que skill dice la hora bien",
+            "que skill dice la hora normal",
+            "que skill dice la hora de manera natural",
+            "recomienda una skill para decir la hora",
+            "recomienda una skill para decir la hora de manera natural"
+          ]
+        },
+        {
+          "name": "QuejaHoraIntent",
+          "slots": [],
+          "samples": [
+            "dices la hora mal",
+            "dices la hora raro",
+            "no dices la hora de manera natural",
+            "no me gusta como dices la hora"
+          ]
+        },
+        {
+          "name": "ConfigurarSkillIntent",
+          "slots": [],
+          "samples": [
+            "configura la aplicación",
+            "quiero configurar la aplicación",
+            "quiero configurar la skill",
+            "puedes decir la hora de manera natural",
+            "quiero que digas la hora de manera natural",
+            "puedes decir la hora de manera precisa",
+            "quiero que digas la hora de manera precisa",
+            "puedes configurar la hora",
+            "configurar modo"
+          ]
+        },
+        {
+          "name": "ActivarModoNaturalIntent",
+          "slots": [],
+          "samples": [
+            "activa modo natural",
+            "pon modo natural",
+            "quiero hora natural",
+            "no seas tan preciso"
+          ]
+        },
+        {
+          "name": "ActivarModoPrecisoIntent",
+          "slots": [],
+          "samples": [
+            "activa modo preciso",
+            "pon modo preciso",
+            "quiero hora precisa",
+            "quiero que seas precisa",
+            "quiero que digas la hora de manera precisa"
+          ]
+        },
+        {
+          "name": "DescribirModoNaturalIntent",
+          "slots": [],
+          "samples": [
+            "describe la hora natural",
+            "que es la hora natural",
+            "como funciona la hora natural",
+            "cómo dices la hora de manera natural"
+          ]
+        },
+        {
+          "name": "DescribirModoPrecisoIntent",
+          "slots": [],
+          "samples": [
+            "describe la hora precisa",
+            "que es la hora precisa",
+            "como funciona la hora precisa",
+            "cómo dices la hora de manera precisa"
+          ]
+        },
+        {
+          "name": "ConfigurarRutinaIntent",
+          "slots": [],
+          "samples": [
+            "ayuda con rutina",
+            "como creo una rutina",
+            "cómo creo una rutina",
+            "configura una rutina",
+            "quiero una rutina para decir la hora",
+            "explica como crear una rutina",
+            "quiero que siempre me digas la hora usando esta skill",
+            "quiero que siempre me digas la hora usando esta aplicación"
+          ]
+        },
+        {
+          "name": "OnboardingRapidoIntent",
+          "slots": [],
+          "samples": [
+            "onboarding rapido",
+            "onboarding rápido",
+            "configuracion rapida",
+            "configuración rápida",
+            "quiero configuracion rapida",
+            "quiero configuración rápida",
+            "configurar todo rapido",
+            "configurar todo rápido"
+          ]
+        },
+        {
+          "name": "OnboardingListoIntent",
+          "slots": [],
+          "samples": [
+            "listo onboarding",
+            "ya esta onboarding",
+            "ya está onboarding",
+            "he terminado onboarding",
+            "onboarding completado"
           ]
         }
       ],

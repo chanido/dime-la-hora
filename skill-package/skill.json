@@ -19,18 +19,18 @@
       "isAvailableWorldwide": true,
       "locales": {
         "es-ES": {
-          "description": "Skill en castellano que dice la hora actual de una forma natural, como se suele decir en España.",
+          "description": "Skill en castellano que dice la hora en modo natural o modo preciso, configurable por voz.",
           "examplePhrases": [
-            "Alexa, abre hora en castellano",
-            "Alexa, pregunta a hora en castellano qué hora es",
-            "Alexa, dile a hora en castellano que me diga la hora bien"
+            "Alexa, abre dime la hora",
+            "Alexa, pregunta a dime la hora qué hora es",
+            "Alexa, dile a dime la hora que configure la aplicación"
           ],
           "keywords": [],
           "name": "Dime la Hora",
-          "summary": "Di la hora actual en castellano natural."
+          "summary": "Di la hora actual en castellano con modo natural o preciso."
         }
       },
-      "testingInstructions": "1) Di 'Alexa, abre hora en castellano'. 2) Di 'Alexa, pregunta a hora en castellano qué hora es'. 3) Di 'Alexa, dile a hora en castellano que me diga la hora bien'."
+      "testingInstructions": "1) Di 'Alexa, abre dime la hora'. 2) Di 'Alexa, pregunta a dime la hora qué hora es'. 3) Di 'Alexa, dile a dime la hora que configure la aplicación'. 4) Di 'Alexa, dile a dime la hora que active modo preciso'."
     }
   }
 }
