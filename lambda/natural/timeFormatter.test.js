@@ -16,7 +16,7 @@ test('12:02 se dice en punto pasadas', () => {
 });
 
 test('21:03 se aproxima al y cinco', () => {
-    assert.equal(formatSpanishTime(21, 3), 'Casi las nueve y cinco.');
+    assert.equal(formatSpanishTime(21, 3), 'Son casi las nueve y cinco.');
 });
 
 test('9:56 se dice menos cinco pasadas', () => {
@@ -24,7 +24,7 @@ test('9:56 se dice menos cinco pasadas', () => {
 });
 
 test('23:58 se aproxima a la hora en punto siguiente', () => {
-    assert.equal(formatSpanishTime(23, 58), 'Casi las doce.');
+    assert.equal(formatSpanishTime(23, 58), 'Son casi las doce.');
 });
 
 test('y media pasadas', () => {
@@ -32,5 +32,5 @@ test('y media pasadas', () => {
 });
 
 test('casi y media', () => {
-    assert.equal(formatSpanishTime(10, 28), 'Casi las diez y media.');
+    assert.equal(formatSpanishTime(10, 28), 'Son casi las diez y media.');
 });
