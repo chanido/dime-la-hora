@@ -50,8 +50,9 @@ git push -u origin main
 ## Comportamiento actual
 
 - Usa la zona horaria del dispositivo desde el que se invoca
-- Dice la hora en castellano natural, con formulas como `y cuarto`, `y media` y `menos cuarto`
-- Ajusta la franja del dia con expresiones como `de la mañana`, `de la tarde` o `de la noche`
+- Dice la hora en castellano natural y redondea por bloques de 5 minutos con formulas como `casi` y `pasadas`
+- No añade la parte del dia (`de la mañana`, `de la tarde`, etc.)
+- Mantiene exactitud cuando cae exactamente en el minuto (`y cuarto`, `y media`, `menos cuarto`)
 
 ## Personalizacion rapida
 
@@ -59,7 +60,8 @@ git push -u origin main
 - Textos del backend: `lambda/index.js`
 - Zona horaria: la skill usa la configurada en el dispositivo desde el que se invoca
 - Fallback: si Alexa no devuelve la zona horaria del dispositivo, cae a `TIME_ZONE` o `Europe/Madrid`
-- Reglas de lenguaje natural: `lambda/preciso/timeFormatter.js`
+- Reglas de lenguaje natural activas: `lambda/natural/timeFormatter.js`
+- Variante exacta anterior: `lambda/preciso/timeFormatter.js`
 
 ## Pruebas locales
 
@@ -69,7 +71,7 @@ npm install
 npm test
 ```
 
-Los tests cubren casos representativos de habla natural en España, incluyendo `y cuarto`, `y media`, `menos veinte`, `menos cuarto`, mediodia y cambios de franja del dia.
+Los tests cubren casos representativos de habla natural en España, incluyendo transiciones por bloques de 5 minutos, uso de `casi`/`pasadas` y casos exactos como `y cuarto`, `y media` y `menos cuarto`.
 
 ## Ejemplos de uso
 

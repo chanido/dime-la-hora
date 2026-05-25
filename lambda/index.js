@@ -3,7 +3,7 @@ const {
     formatSpanishTimeFromDate,
     normalizeTimeZone,
     resolveFallbackTimeZone
-} = require('./preciso/timeFormatter');
+} = require('./natural/timeFormatter');
 
 async function getDeviceTimeZone(handlerInput) {
     const deviceId = handlerInput.requestEnvelope?.context?.System?.device?.deviceId;
