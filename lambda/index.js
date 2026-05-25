@@ -1,3 +1,4 @@
+const AWS = require('aws-sdk');
 const Alexa = require('ask-sdk-core');
 const ddbAdapter = require('ask-sdk-dynamodb-persistence-adapter');
 const {
@@ -12,9 +13,9 @@ const {
 const MODE_NATURAL = 'natural';
 const MODE_PRECISE = 'preciso';
 const ONBOARDING_DONE_KEY = 'onboardingDone';
-const PERSISTENCE_TABLE = process.env.DYNAMODB_PERSISTENCE_TABLE_NAME || 'dime-la-hora-users';
-const PERSISTENCE_REGION = process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
-const HAS_PERSISTENCE = Boolean(PERSISTENCE_REGION);
+const PERSISTENCE_TABLE = process.env.DYNAMODB_PERSISTENCE_TABLE_NAME;
+const PERSISTENCE_REGION = process.env.DYNAMODB_PERSISTENCE_REGION || process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
+const HAS_PERSISTENCE = Boolean(PERSISTENCE_TABLE && PERSISTENCE_REGION);
 
 const MODE_DESCRIPTION_NATURAL = 'La hora natural redondea los minutos para sonar como la diríamos en España. Por ejemplo: Son casi las doce.';
 const MODE_DESCRIPTION_PRECISE = 'La hora precisa dice los minutos exactos y el momento del día. Por ejemplo: Son las doce menos un minuto de la mañana.';
@@ -430,7 +431,11 @@ if (HAS_PERSISTENCE) {
     skillBuilder.withPersistenceAdapter(
         new ddbAdapter.DynamoDbPersistenceAdapter({
             tableName: PERSISTENCE_TABLE,
-            createTable: true
+            createTable: false,
+            dynamoDBClient: new AWS.DynamoDB({
+                apiVersion: 'latest',
+                region: PERSISTENCE_REGION
+            })
         })
     );
 }
