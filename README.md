@@ -59,7 +59,7 @@ git push -u origin main
 - Textos del backend: `lambda/index.js`
 - Zona horaria: la skill usa la configurada en el dispositivo desde el que se invoca
 - Fallback: si Alexa no devuelve la zona horaria del dispositivo, cae a `TIME_ZONE` o `Europe/Madrid`
-- Reglas de lenguaje natural: `lambda/timeFormatter.js`
+- Reglas de lenguaje natural: `lambda/preciso/timeFormatter.js`
 
 ## Pruebas locales
 
