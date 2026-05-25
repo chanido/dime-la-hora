@@ -26,9 +26,9 @@ test('cambio de mañana a mediodía: 11:59 -> 12:00', () => {
     assertPeriod(12, 0, 'del mediodía.');
 });
 
-test('cambio de mediodía a tarde: 12:29 -> 12:30', () => {
-    assertPeriod(12, 29, 'del mediodía.');
-    assertPeriod(12, 30, 'de la tarde.');
+test('cambio de mediodía a tarde: 12:59 -> 13:00', () => {
+    assertPeriod(12, 59, 'del mediodía.');
+    assertPeriod(13, 0, 'de la tarde.');
 });
 
 test('cambio de tarde a noche: 19:59 -> 20:00', () => {

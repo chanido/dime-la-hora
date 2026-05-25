@@ -107,7 +107,7 @@ function getDayPeriod(hour24, minute) {
         return 'de la mañana';
     }
 
-    if (totalMinutes < 750) {
+    if (totalMinutes < 780) {
         return 'del mediodía';
     }
 
