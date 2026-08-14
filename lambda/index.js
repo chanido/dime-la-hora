@@ -16,12 +16,12 @@ const ONBOARDING_DONE_KEY = 'onboardingDone';
 const PERSISTENCE_TABLE = process.env.DYNAMODB_PERSISTENCE_TABLE_NAME;
 const PERSISTENCE_REGION = process.env.DYNAMODB_PERSISTENCE_REGION || process.env.AWS_REGION || process.env.AWS_DEFAULT_REGION;
 const HAS_PERSISTENCE = Boolean(PERSISTENCE_TABLE && PERSISTENCE_REGION);
-const SKILL_NAME = 'Hora Natural en Castellano';
+const SKILL_NAME = 'Hora Natural';
 
 const MODE_DESCRIPTION_NATURAL = 'La hora natural redondea los minutos para sonar como la diríamos en España. Por ejemplo: Son casi las doce.';
 const MODE_DESCRIPTION_PRECISE = 'La hora precisa dice los minutos exactos y el momento del día. Por ejemplo: Son las doce menos un minuto de la mañana.';
-const ROUTINE_VOICE_SETUP_EXAMPLE = `Alexa, crea una rutina. Cuando diga dime la hora, abre ${SKILL_NAME}.`;
-const ROUTINE_VOICE_SETUP_FALLBACK = 'Si quieres, añade también la frase dime la hora bien. Si hace falta, termina de ajustar esa misma rutina en la app Alexa.';
+const ROUTINE_VOICE_SETUP_EXAMPLE = `Alexa, crea una rutina para abrir ${SKILL_NAME} cuando diga dime la hora bien.`;
+const ROUTINE_VOICE_SETUP_FALLBACK = 'Si hace falta, termina de ajustar la rutina en la app Alexa.';
 
 function getModeFormatter(mode) {
     if (mode === MODE_PRECISE) {
@@ -426,7 +426,7 @@ const skillBuilder = Alexa.SkillBuilders.custom()
     )
     .addErrorHandlers(ErrorHandler)
     .withApiClient(new Alexa.DefaultApiClient())
-    .withCustomUserAgent('dime-la-hora/v1.0');
+    .withCustomUserAgent('hora-natural/v1.0');
 
 if (HAS_PERSISTENCE) {
     skillBuilder.withPersistenceAdapter(

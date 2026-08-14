@@ -1,7 +1,7 @@
 {
-  "name": "dime-la-hora",
+  "name": "hora-natural",
   "version": "1.0.0",
-  "description": "Backend Node.js para una skill de Alexa que dice la hora en castellano.",
+  "description": "Backend Node.js para la skill de Alexa Hora Natural.",
   "main": "index.js",
   "private": true,
   "scripts": {

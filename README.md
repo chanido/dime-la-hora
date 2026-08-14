@@ -1,4 +1,4 @@
-# Hora Natural en Castellano
+# Hora Natural
 
 Skill Alexa en castellano para escuchar la hora como la diríamos en España.
 
@@ -110,7 +110,7 @@ npm run check  # Verifica que el handler carga correctamente
 - "Alexa, abre hora natural" → "configuración rápida"
 - "Alexa, dile a hora natural ayuda con rutina"
 - "Alexa, dile a hora natural que configura la aplicación"
-- Fuera de la skill, prueba: "Alexa, crea una rutina. Cuando diga dime la hora, abre Hora Natural en Castellano"
+- Fuera de la skill, prueba: "Alexa, crea una rutina para abrir Hora Natural cuando diga dime la hora bien"
 
 ### Pruebas y calidad
 

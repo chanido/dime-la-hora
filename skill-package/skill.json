@@ -19,7 +19,7 @@
       "isAvailableWorldwide": true,
       "locales": {
         "es-ES": {
-          "description": "Hora Natural en Castellano te da la hora en castellano como la diríamos en España. Puedes elegir entre un modo natural, con expresiones como 'son casi las doce', y un modo preciso, con minutos exactos y momento del día. También te guía para dejar una rutina lista en Alexa+.",
+          "description": "Hora Natural te da la hora en castellano como la diríamos en España. Puedes elegir entre un modo natural, con expresiones como 'son casi las doce', y un modo preciso, con minutos exactos y momento del día. También te guía para dejar una rutina lista en Alexa+.",
           "examplePhrases": [
             "Alexa, abre hora natural",
             "Alexa, pregunta a hora natural qué hora es",
@@ -34,11 +34,11 @@
             "preciso",
             "rutina"
           ],
-          "name": "Hora Natural en Castellano",
+          "name": "Hora Natural",
           "summary": "La hora en castellano, en modo natural o preciso."
         }
       },
-      "testingInstructions": "PRIMER ARRANQUE:\n1. Di: 'Alexa, abre hora natural'.\n2. Comprueba que la skill ofrece la guía inicial.\n3. Di: 'configuración rápida'.\n4. Cuando termines, di: 'ya lo tengo'.\n\nMODOS:\n5. Di: 'Alexa, pregunta a hora natural qué hora es' y comprueba el modo natural.\n6. Di: 'Alexa, dile a hora natural que ponga el modo preciso'.\n7. Repite la consulta de hora y comprueba el modo preciso.\n8. Di: 'Alexa, dile a hora natural cómo suena el modo natural'.\n\nRUTINA CON ALEXA+:\n9. Si tu cuenta admite rutinas por voz, di fuera de la skill: 'Alexa, crea una rutina. Cuando diga dime la hora, abre Hora Natural en Castellano'.\n10. Añade también la frase 'dime la hora bien', por voz o desde la app.\n11. Si hace falta, termina de ajustar esa misma rutina en la app Alexa.\n12. Di: 'Alexa, dime la hora' y comprueba que la rutina abre la skill.\n\nAYUDA EXTRA:\n13. Di: 'Alexa, dile a hora natural ayuda con rutina'.\n14. Di: 'Alexa, dile a hora natural cómo suena el modo preciso'."
+      "testingInstructions": "PRIMER ARRANQUE:\n1. Di: 'Alexa, abre hora natural'.\n2. Comprueba que la skill ofrece la guía inicial.\n3. Di: 'configuración rápida'.\n4. Cuando termines, di: 'ya lo tengo'.\n\nMODOS:\n5. Di: 'Alexa, pregunta a hora natural qué hora es' y comprueba el modo natural.\n6. Di: 'Alexa, dile a hora natural que ponga el modo preciso'.\n7. Repite la consulta de hora y comprueba el modo preciso.\n8. Di: 'Alexa, dile a hora natural cómo suena el modo natural'.\n\nRUTINA CON ALEXA+:\n9. Si tu cuenta admite rutinas por voz, di fuera de la skill: 'Alexa, crea una rutina para abrir Hora Natural cuando diga dime la hora bien'.\n10. Si hace falta, termina de ajustar la rutina en la app Alexa.\n11. Di: 'Alexa, dime la hora bien' y comprueba que la rutina abre la skill.\n\nAYUDA EXTRA:\n12. Di: 'Alexa, dile a hora natural ayuda con rutina'.\n13. Di: 'Alexa, dile a hora natural cómo suena el modo preciso'."
     }
   }
 }
